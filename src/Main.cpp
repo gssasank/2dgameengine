@@ -1,11 +1,15 @@
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
+#include "Game.h"
 
-int main() {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    std::cout << "Hello, world!" << std::endl;
+int main(int argc, char* argv[]) {
+    
+    std::cout << "Started execution of the main file...." << std::endl;
+
+    Game game; // Since the "new" keyword is not being used here, C++ stores the object in the stack and destrys it when the scope ends.
+
+    game.Initialize();
+    game.Run();
+    game.Destroy();
+
     return 0;
 }
