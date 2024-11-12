@@ -18,12 +18,23 @@ void Game::Initialize() {
         return;
     }
 
+    SDL_DisplayMode displayMode;
+
+    SDL_GetCurrentDisplayMode(0, &displayMode);
+
+    // Config for "fake fullscreen" that can behave differently on monitors of different size.
+    // windowWidth = displayMode.w;
+    // windowHeight = displayMode.h;
+
+    windowWidth = 800;
+    windowHeight = 600;   
+
     window = SDL_CreateWindow(
         NULL,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        800,
-        600,
+        windowWidth,
+        windowHeight,
         SDL_WINDOW_BORDERLESS
     );
 
@@ -32,11 +43,14 @@ void Game::Initialize() {
         return;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); // Enabled dedicated GPU acceleration and VSync
 
     if (!renderer) {
         std::cerr << "Error creating SDL renderer" << std::endl;
     }
+    
+    // Config for "real fullscreen"
+    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
     // if everything has successfully been initialized, then change isRunning to true
     isRunning = true;
@@ -68,7 +82,7 @@ void Game::Update() {
 }
 
 void Game::Render() {
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 200, 55, 0, 255);
     SDL_RenderClear(renderer);
 
     // TODO: Update Game Objects......
