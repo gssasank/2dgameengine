@@ -2,7 +2,7 @@
 #define GAME_H
 #include <SDL2/SDL.h>
 
-const int FPS = 120;
+const int FPS = 200;
 const int MILLISECONDS_PER_FRAME = 1000 / FPS;
 
 class Game {

@@ -90,19 +90,28 @@ void Game::Setup(){
     // playerPosition.y = 20.0;
 
     playerPosition = glm::vec2(10.0, 20.0);
-    playerVelocity = glm::vec2(1.0, 1.0);
+    playerVelocity = glm::vec2(150.0, 100.0);
 
 }
 
 void Game::Update() {
     // Enforcing FPS cap in the update loop - if we are too fast, waste time till MILLISECONDS_PER_FRAME cap is reached
-    while(!SDL_TICKS_PASSED(SDL_GetTicks(), MILLISECONDS_PER_FRAME + millisecondsPreviousFrame));
+    // while(!SDL_TICKS_PASSED(SDL_GetTicks(), MILLISECONDS_PER_FRAME + millisecondsPreviousFrame)); //This is a very primitive approach
+    
+    int timeToWait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - millisecondsPreviousFrame);
+    if (timeToWait > 0 && timeToWait <= millisecondsPreviousFrame){
+        SDL_Delay(timeToWait);
+    }
+
+
+    // Difference in ticks since last frame, conerted into seconds
+    double deltaTime = (SDL_GetTicks() - millisecondsPreviousFrame)/1000.0;
 
     // storing the current frame time
     millisecondsPreviousFrame = SDL_GetTicks();
 
-    playerPosition.x += playerVelocity.x;
-    playerPosition.y += playerVelocity.y;
+    playerPosition.x += playerVelocity.x * deltaTime; // basically equivalent to v = D * t; here we have converted the rendering process from per frame to per second.
+    playerPosition.y += playerVelocity.y * deltaTime;
 }
 
 void Game::Render() {
@@ -141,7 +150,7 @@ void Game::Render() {
 
     SDL_RenderPresent(renderer);
     // SDL uses something called a double-buffered renderer, which basically means that there are 2
-    // different buffers at all times - the front buffer and the back buffer. The fron buffer is the
+    // different buffers at all times - the front buffer and the back buffer. The front buffer is the
     // one that is displayed on the screen and the back buffer is the one where all the sprites and artefacts
     // are populated. Once all of them are populated, the back buffer is swapped with the front buffer
     // and becomes the new front buffer. This is done to prevent any screen-tears, glitching and artefacting that would
