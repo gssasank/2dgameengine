@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 Game::Game() {
@@ -57,6 +58,10 @@ void Game::Initialize() {
 
 }
 
+void Game::Setup(){
+    // TODO: Setup...
+}
+
 void Game::ProcessInput() {
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)){
@@ -82,15 +87,45 @@ void Game::Update() {
 }
 
 void Game::Render() {
-    SDL_SetRenderDrawColor(renderer, 200, 55, 0, 255);
-    SDL_RenderClear(renderer);
 
-    // TODO: Update Game Objects......
+    // The Render() function is called in a loop, either as part of the game's main loop or a separate rendering loop. 
+    // In this case, the back buffer is cleared at the start of each iteration of the loop, before any new objects are drawn. 
+    // The player object is then drawn on top of the cleared back buffer.
+
+    SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
+    SDL_RenderClear(renderer);
+    /* This clears the current rendering target (the back buffer) with the currently set draw color. 
+    This effectively resets the entire rendering canvas to the specified background color, 
+    preparing it for the next rendering operations. */
+
+    // The following code is to render a black rectangle on the screen
+    // SDL_SetRenderDrawColor(renderer, 255, 255,255,255);
+    // SDL_Rect player = {20, 20, 40, 40};
+    // SDL_RenderFillRect(renderer, &player);
+
+    // Rendering an actual image
+    SDL_Surface* surface = IMG_Load("./assets/images/tank-tiger-right.png");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+
+    // Destination Rectanlge to paste our texture
+    SDL_Rect dstRect = {20, 20, 32, 32};
+    SDL_RenderCopy(renderer, texture, NULL, &dstRect);
+    // The params are renderer, texture, what part of the texture we want to copy (NULL defaults to the complete texture, the dest rect where we will paste the texture)
+    SDL_DestroyTexture(texture);
+
 
     SDL_RenderPresent(renderer);
+    // SDL uses something called a double-buffered renderer, which basically means that there are 2
+    // different buffers at all times - the front buffer and the back buffer. The fron buffer is the
+    // one that is displayed on the screen and the back buffer is the one where all the sprites and artefacts
+    // are populated. Once all of them are populated, the back buffer is swapped with the front buffer
+    // and becomes the new front buffer. This is done to prevent any screen-tears, glitching and artefacting that would
+    // have been the result of directly populating the front buffer.
 }
 
 void Game::Run() {
+    Setup();
     while (isRunning) {
         ProcessInput();
         Update();
