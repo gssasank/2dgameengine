@@ -95,6 +95,12 @@ void Game::Setup(){
 }
 
 void Game::Update() {
+    // Enforcing FPS cap in the update loop - if we are too fast, waste time till MILLISECONDS_PER_FRAME cap is reached
+    while(!SDL_TICKS_PASSED(SDL_GetTicks(), MILLISECONDS_PER_FRAME + millisecondsPreviousFrame));
+
+    // storing the current frame time
+    millisecondsPreviousFrame = SDL_GetTicks();
+
     playerPosition.x += playerVelocity.x;
     playerPosition.y += playerVelocity.y;
 }
