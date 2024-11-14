@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Logger.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <glm/glm.hpp>
@@ -6,17 +7,17 @@
 
 Game::Game() {
     isRunning = false;
-    std::cout << "Game constructor called" << std::endl;
+    Logger::Log("Game constructor called");
 }
 
 Game::~Game() {
-    std::cout << "Game destructor called" << std::endl;
+    Logger::Log("Game destructor called");
 }
 
 void Game::Initialize() {
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        std::cerr << "Error initializing SDL2" << std::endl;
+        Logger::Err("Error initializing SDL2");
         return;
     }
 
@@ -41,14 +42,14 @@ void Game::Initialize() {
     );
 
     if (!window) {
-        std::cerr << "Error creating SDL window" << std::endl;
+        Logger::Err("Error creating SDL window");
         return;
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); // Enabled dedicated GPU acceleration and VSync
 
     if (!renderer) {
-        std::cerr << "Error creating SDL renderer" << std::endl;
+        Logger::Err("Error creating SDL renderer");
     }
     
     // Config for "real fullscreen"
@@ -98,10 +99,13 @@ void Game::Update() {
     // Enforcing FPS cap in the update loop - if we are too fast, waste time till MILLISECONDS_PER_FRAME cap is reached
     // while(!SDL_TICKS_PASSED(SDL_GetTicks(), MILLISECONDS_PER_FRAME + millisecondsPreviousFrame)); //This is a very primitive approach
     
+    // A more elegant implementation of the above Logic, this also has the added benifit of not holding up the CPU for the entire wait duration.
+    // Commenting out/removing the below code would essentially run the game at uncapped framerate.
     int timeToWait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - millisecondsPreviousFrame);
     if (timeToWait > 0 && timeToWait <= millisecondsPreviousFrame){
         SDL_Delay(timeToWait);
     }
+    // SDL_Delay will never work at a finer resolution than what the OS's scheduler offers.
 
 
     // Difference in ticks since last frame, conerted into seconds

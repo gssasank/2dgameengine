@@ -1,9 +1,10 @@
 #include <iostream>
+#include "Logger.h"
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
     
-    std::cout << "Started execution of the main file...." << std::endl;
+    Logger::Log("Started execution of the main file.");
 
     Game game; // Since the "new" keyword is not being used here, C++ stores the object in the stack and destroys it when the scope ends.
 
