@@ -23,6 +23,9 @@ OBJECT = gameengine
 CFLAGS = $(SDL2FLAGS) $(SDL2MIXERFLAGS) $(SDL2IMAGEFLAGS) $(SDL2TTFFLAGS)
 LIBS = $(SDL2LIBS) $(SDL2MIXERLIBS) $(SDL2IMAGELIBS) $(SDL2TTFLIBS) -llua -I"./libs/"
 
+#-------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------
+
 build:
 	$(CC) $(CFLAGS) $(CSTD) $(SRCFILES) $(CFLAGS) $(LIBS) -o $(OBJECT)
 
