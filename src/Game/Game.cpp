@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "../Logger/Logger.h"
+#include "../ECS/ECS.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <glm/glm.hpp>
@@ -93,6 +94,11 @@ void Game::Setup(){
     playerPosition = glm::vec2(10.0, 20.0);
     playerVelocity = glm::vec2(150.0, 100.0);
 
+    // Entity tank = registry.CreateEntity();
+    // tank.addCompnent<TransformComponent>();
+    // tank.addCompnent<BoxColliderComponent>();
+    // tank.addCompnent<SpriteComponent>("./assets/images/tank.png");
+
 }
 
 void Game::Update() {
@@ -116,6 +122,12 @@ void Game::Update() {
 
     playerPosition.x += playerVelocity.x * deltaTime; // basically equivalent to v = D * t; here we have converted the rendering process from per frame to per second.
     playerPosition.y += playerVelocity.y * deltaTime;
+
+    // TODO: 
+    // MovementSystem.Update();
+    // CollisionSystem.Update();
+    // DamageSystem.Update();
+
 }
 
 void Game::Render() {
