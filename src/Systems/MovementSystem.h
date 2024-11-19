@@ -4,7 +4,7 @@
 class MovementSystem: public System {
     public:
         MovementSystem(){
-            // RequireComponent<TransformComponnet>();
+            // RequireComponent<TransformComponent>();
             // RequireComponent<...>();
            
         }
