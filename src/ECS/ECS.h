@@ -19,7 +19,7 @@ struct IComponent{
         static int nextId;
 };
 
-// Used to assign a unique ID for each component type .
+// Used to assign a unique ID for each component type.
 template <typename T>
 class Component: public IComponent{
     // Returns the unique ID of Component<T>
