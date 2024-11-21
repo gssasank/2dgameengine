@@ -2,7 +2,10 @@
 CC = g++
 CFLAGS = -Wall -Wfatal-errors
 CSTD = -std=c++17
-SRCFILES = ./src/*.cpp ./src/Game/*.cpp ./src/Logger/*.cpp
+SRCFILES =  ./src/*.cpp \
+			./src/Game/*.cpp \
+			./src/Logger/*.cpp \
+			./src/ECS/*.cpp
 
 # Base SDL2 flags
 SDL2FLAGS = $(shell pkg-config --cflags sdl2)

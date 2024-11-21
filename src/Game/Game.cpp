@@ -120,8 +120,8 @@ void Game::Update() {
     // storing the current frame time
     millisecondsPreviousFrame = SDL_GetTicks();
 
-    playerPosition.x += playerVelocity.x * deltaTime; // basically equivalent to v = D * t; here we have converted the rendering process from per frame to per second.
-    playerPosition.y += playerVelocity.y * deltaTime;
+    // playerPosition.x += playerVelocity.x * deltaTime; // basically equivalent to v = D * t; here we have converted the rendering process from per frame to per second.
+    // playerPosition.y += playerVelocity.y * deltaTime;
 
     // TODO: 
     // MovementSystem.Update();
