@@ -1,7 +1,7 @@
 # 2D Game Engine
 A fully-functional 2D Game Engine
 
-### Usage On Apple Silicon
+### Usage On OSX - Apple Silicon
 
 Use homebrew to install Lua, DL2, SDL2_Mixer, SDL2_TTF, and SDL2_Image.
 
