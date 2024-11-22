@@ -1,5 +1,5 @@
 # 2D Game Engine
-A fully-functinal 2D Game Engine
+A fully-functional 2D Game Engine
 
 ### Usage On Apple Silicon
 
