@@ -87,7 +87,7 @@ glm::vec2 playerPosition;
 glm::vec2 playerVelocity;
 
 void Game::Setup(){
-    // One way to intialize the vector
+    // One way to initialize the vector
     // playerPosition.x = 10.0;
     // playerPosition.y = 20.0;
 
@@ -95,9 +95,9 @@ void Game::Setup(){
     playerVelocity = glm::vec2(150.0, 100.0);
 
     // Entity tank = registry.CreateEntity();
-    // tank.addCompnent<TransformComponent>();
-    // tank.addCompnent<BoxColliderComponent>();
-    // tank.addCompnent<SpriteComponent>("./assets/images/tank.png");
+    // tank.addComponent<TransformComponent>();
+    // tank.addComponent<BoxColliderComponent>();
+    // tank.addComponent<SpriteComponent>("./assets/images/tank.png");
 
 }
 
@@ -105,7 +105,7 @@ void Game::Update() {
     // Enforcing FPS cap in the update loop - if we are too fast, waste time till MILLISECONDS_PER_FRAME cap is reached
     // while(!SDL_TICKS_PASSED(SDL_GetTicks(), MILLISECONDS_PER_FRAME + millisecondsPreviousFrame)); //This is a very primitive approach
     
-    // A more elegant implementation of the above Logic, this also has the added benifit of not holding up the CPU for the entire wait duration.
+    // A more elegant implementation of the above Logic, this also has the added benefit of not holding up the CPU for the entire wait duration.
     // Commenting out/removing the below code would essentially run the game at uncapped framerate.
     int timeToWait = MILLISECONDS_PER_FRAME - (SDL_GetTicks() - millisecondsPreviousFrame);
     if (timeToWait > 0 && timeToWait <= millisecondsPreviousFrame){
@@ -114,7 +114,7 @@ void Game::Update() {
     // SDL_Delay will never work at a finer resolution than what the OS's scheduler offers.
 
 
-    // Difference in ticks since last frame, conerted into seconds
+    // Difference in ticks since last frame, converted into seconds
     double deltaTime = (SDL_GetTicks() - millisecondsPreviousFrame)/1000.0;
 
     // storing the current frame time
@@ -169,7 +169,7 @@ void Game::Render() {
     // different buffers at all times - the front buffer and the back buffer. The front buffer is the
     // one that is displayed on the screen and the back buffer is the one where all the sprites and artefacts
     // are populated. Once all of them are populated, the back buffer is swapped with the front buffer
-    // and becomes the new front buffer. This is done to prevent any screen-tears, glitching and artefacting that would
+    // and becomes the new front buffer. This is done to prevent any screen-tears, glitching and artifacting that would
     // have been the result of directly populating the front buffer.
 }
 

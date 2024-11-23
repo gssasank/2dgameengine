@@ -18,5 +18,5 @@ std::vector<Entity> System::GetSystemEntities() const { // const added because t
 }
 
 const Signature& System::GetComponentSignature() const { // const added because they only return values and they do not modify anything.
-    return System::componentSingature;
+    return System::componentSignature;
 }

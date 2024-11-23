@@ -1,7 +1,7 @@
 # Basic flags
 CC = g++
 CFLAGS = -Wall -Wfatal-errors
-CSTD = -std=c++17
+CSTD = -std=c++2b
 SRCFILES =  ./src/*.cpp \
 			./src/Game/*.cpp \
 			./src/Logger/*.cpp \
@@ -37,3 +37,5 @@ run:
 
 clean:
 	rm $(OBJECT)
+
+all: build run

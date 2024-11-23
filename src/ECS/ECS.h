@@ -50,7 +50,7 @@ class Entity {
 ////////////////////////////////////////////////////////////////////////////////////////
 class System {
     private:
-        Signature componentSingature; // So that system knows which entity to act upon. Unique entities will have specific component signatures.
+        Signature componentSignature; // So that system knows which entity to act upon. Unique entities will have specific component signatures.
         std::vector<Entity> entities; // List of entities that a system is interested in.
 
     public:
@@ -72,6 +72,6 @@ class Registry {
 
 template <typename TComponent>
 void System::RequireComponent(){
-    const auto componentId = Component<TComponent>.GetId();
-    componentSingature.set(componentId);
+    const auto componentId = Component<TComponent>().GetId();
+    componentSignature.set(componentId);
 }
