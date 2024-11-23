@@ -41,6 +41,10 @@ class Entity {
     public:
         Entity(int id): id(id) {};
         int GetId() const;
+
+        bool operator ==(const Entity& otherEntity) const { return id == otherEntity.id; }
+        bool operator !=(const Entity& otherEntity) const { return id =!= otherEntity.id; }
+
 }; 
 
 ////////////////////////////////////////////////////////////////////////////////////////
