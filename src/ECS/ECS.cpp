@@ -12,7 +12,6 @@ void System::AddEntityToSystem(Entity entity) {
 }
 
 void System::RemoveEntityFromSystem(Entity entity) {
-    //TODO: Write this function.
 
     auto lambda = [&entity](Entity otherEntity){
         return entity.GetId() == otherEntity.GetId();
