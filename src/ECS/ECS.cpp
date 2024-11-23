@@ -17,6 +17,8 @@ void System::RemoveEntityFromSystem(Entity entity) {
         return entity.GetId() == otherEntity.GetId();
     };
 
+    Logger::Log("Removed an entity from System.")
+
     entities.erase(std::remove_if(entities.begin(), entities.end(), lambda),entities.end());
 }
 
