@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <typeindex>
+#include <set>
 
 const unsigned int MAX_COMPONENTS = 32;
 
@@ -46,6 +47,8 @@ class Entity {
 
         bool operator ==(const Entity& otherEntity) const { return id == otherEntity.id; }
         bool operator !=(const Entity& otherEntity) const { return id != otherEntity.id; }
+        bool operator <(const Entity& otherEntity) const { return id < otherEntity.id; }
+        bool operator >(const Entity& otherEntity) const { return id > otherEntity.id; }
 
 }; 
 
@@ -135,6 +138,9 @@ class Registry {
     private:
         // Keep track of how many entities are added to the scene.
         int numEntities = 0;
+        std::set<Entity> entitiesToBeAdded; // Entities awaiting creation in the next registry update.
+        std::set<Entity> entitiesToBeKilled; // Entities awaiting destruction in the next registry update.
+
         // A vector of component Pools, each pool contains all the data for a certain component type.
         // [vector index = ComponentType ID]
         // [Pool index = Entity ID]
@@ -152,6 +158,12 @@ class Registry {
     public:
         Registry() = default;
         ~Registry() = default;
+
+        Entity CreateEntity();
+        void KillEntity(Entity entity);
+        void Update();
+        void AddEntityToSystem(Entity entity);
+
 };
 
 template <typename TComponent>
