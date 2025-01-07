@@ -7,4 +7,4 @@ Use homebrew to install Lua, DL2, SDL2_Mixer, SDL2_TTF, and SDL2_Image.
 
 Make sure you're on Lua version 5.4.7, if not you'll have to update the header files in the libs directory.
 
-In theory, there should be any issues running this project on Linux.
+In theory, there should not be any issues running this project on Linux.
